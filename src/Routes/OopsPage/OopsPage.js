@@ -1,13 +1,14 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 
-import { Main, Unavailable } from '@redhat-cloud-services/frontend-components';
+import { Unavailable } from '@redhat-cloud-services/frontend-components';
+import { PageSection } from '@patternfly/react-core';
 
 const OopsPage = () => {
     return (
-        <Main>
+        <PageSection>
             <Unavailable/>
-        </Main>
+        </PageSection>
     );
 };
 

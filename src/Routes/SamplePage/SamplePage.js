@@ -2,8 +2,8 @@ import React from 'react';
 import { withRouter, Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
-import { Button, StackItem, Stack, Title } from '@patternfly/react-core';
-import { Main, PageHeader, PageHeaderTitle } from '@redhat-cloud-services/frontend-components';
+import { Button, StackItem, Stack, Title, PageSection } from '@patternfly/react-core';
+import { PageHeader, PageHeaderTitle } from '@redhat-cloud-services/frontend-components';
 import { addNotification } from '@redhat-cloud-services/frontend-components-notifications/';
 
 import asyncComponent from '../../Utilities/asyncComponent';
@@ -38,7 +38,7 @@ const SamplePage = () => {
                 <PageHeaderTitle title='Sample Insights App'/>
                 <p> This is page header text </p>
             </PageHeader>
-            <Main>
+            <PageSection>
                 <Stack hasGutter>
                     <StackItem>
                         <Title headingLevel="h2" size="3xl"> Alerts </Title>
@@ -57,7 +57,7 @@ const SamplePage = () => {
                         </Stack>
                     </StackItem>
                 </Stack>
-            </Main>
+            </PageSection>
         </React.Fragment>
     );
 };

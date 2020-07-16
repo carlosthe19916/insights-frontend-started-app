@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import asyncComponent from './Utilities/asyncComponent';
 import some from 'lodash/some';
+import { Paths } from './Paths';
 
 /**
  * Aysnc imports of components
@@ -22,12 +23,6 @@ import some from 'lodash/some';
 const SamplePage = asyncComponent(() => import(/* webpackChunkName: "SamplePage" */ './Routes/SamplePage/SamplePage'));
 const OopsPage = asyncComponent(() => import(/* webpackChunkName: "OopsPage" */ './Routes/OopsPage/OopsPage'));
 const NoPermissionsPage = asyncComponent(() => import(/* webpackChunkName: "NoPermissionsPage" */ './Routes/NoPermissionsPage/NoPermissionsPage'));
-
-const paths = {
-    samplePage: '/sample',
-    oops: '/oops',
-    noPermissions: '/no-permissions'
-};
 
 const InsightsRoute = ({ component: Component, rootClass, ...rest }) => {
     const root = document.getElementById('root');
@@ -56,11 +51,11 @@ export const Routes = () => {
 
     return (
         <Switch>
-            <InsightsRoute path={paths.samplePage} component={SamplePage} rootClass='samplePage' />
-            <InsightsRoute path={paths.oops} component={OopsPage} rootClass='oopsPage' />
-            <InsightsRoute path={paths.noPermissions} component={NoPermissionsPage} rootClass='noPermissionsPage' />
+            <InsightsRoute path={Paths.samplePage} component={SamplePage} rootClass='samplePage' />
+            <InsightsRoute path={Paths.oops} component={OopsPage} rootClass='oopsPage' />
+            <InsightsRoute path={Paths.noPermissions} component={NoPermissionsPage} rootClass='noPermissionsPage' />
             { /* Finally, catch all unmatched routes */}
-            <Route render={() => some(paths, p => p === path) ? null : (<Redirect to={paths.samplePage} />)} />
+            <Route render={() => some(Paths, p => p === path) ? null : (<Redirect to={Paths.samplePage} />)} />
         </Switch>
     );
 };

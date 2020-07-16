@@ -1,13 +1,14 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 
-import { Main, NotAuthorized } from '@redhat-cloud-services/frontend-components';
+import { NotAuthorized } from '@redhat-cloud-services/frontend-components';
+import { PageSection } from '@patternfly/react-core';
 
 const NoPermissionsPage = () => {
     return (
-        <Main>
+        <PageSection>
             <NotAuthorized serviceName='Sample app'/>
-        </Main>
+        </PageSection>
     );
 };
 
