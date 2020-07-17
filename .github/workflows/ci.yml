@@ -39,7 +39,6 @@ jobs:
     - run: npm ci
     - run: npm run build-standalone:prod
     - name: Container image
-      if: ${{ secrets.DOCKER_USERNAME != '' && secrets.DOCKER_PASSWORD != '' }}
       # Uses sha for added security since tags can be updated
       uses: elgohr/Publish-Docker-Github-Action@b2f63259b466ca5a4be395c392546de447450334      
       with:
