@@ -13,7 +13,7 @@ Open your browser - [Standalone](https://localhost:8002/)
 This method is just for RedHat employees.
 
 ```shell
-npm run start
+npm run start-insights
 ```
 
 In a second terminal:
@@ -23,3 +23,11 @@ SPANDX_CONFIG=profiles/local-frontend-and-api.js bash ../insights-proxy/scripts/
 ```
 
 open your browser - [Insights](https://ci.foo.redhat.com:1337/beta/migrations/migration-analytics)
+
+## Build container image
+
+```
+npm run build-standalone:prod
+docker build -t carlosthe19916/insights-frontend-started-app:latest .
+docker run -p 8080:80 carlosthe19916/insights-frontend-started-app:latest
+```

@@ -5,9 +5,9 @@ name: CI
 
 on:
   push:
-    branches: [ master ]
+    branches: [ master,  ci-stable, qa-beta, qa-stable, prod-beta, prod-stable]
   pull_request:
-    branches: [ master ]
+    branches: [ master,  ci-stable, qa-beta, qa-stable, prod-beta, prod-stable]
 
 jobs:
   build:
@@ -32,19 +32,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Use Node.js 10.x
+    - name: Use Node.js 12.x
       uses: actions/setup-node@v1
       with:
-        node-version: 10.x
+        node-version: 12.x
     - run: npm ci
     - run: npm run build-standalone:prod
     - name: Container image
+      if: ${{ secrets.DOCKER_USERNAME != '' && secrets.DOCKER_PASSWORD != '' }}
       # Uses sha for added security since tags can be updated
-      uses: elgohr/Publish-Docker-Github-Action@b2f63259b466ca5a4be395c392546de447450334
+      uses: elgohr/Publish-Docker-Github-Action@b2f63259b466ca5a4be395c392546de447450334      
       with:
-        name: carlosthe19916/insights-frontend-started-app
+        name: ${{ env.GITHUB_REPOSITORY }}
         dockerfile: Dockerfile
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
         snapshot: false
-        tags: "master"
+        tags: ${ env.GITHUB_REF##*/}
