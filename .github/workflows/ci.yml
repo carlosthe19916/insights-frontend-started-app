@@ -47,4 +47,4 @@ jobs:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
         snapshot: false
-        tags: ${ github.ref##*/}
+        tags: master
