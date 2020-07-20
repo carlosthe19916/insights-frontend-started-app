@@ -7,6 +7,7 @@
     "build-insights:prod": "NODE_ENV=production webpack --config config/prod.insights.webpack.config.js",
     "build-standalone": "webpack --config config/prod.standalone.webpack.config.js",
     "build-standalone:prod": "NODE_ENV=production webpack --config config/prod.standalone.webpack.config.js",
+    "build": "npm run build-standalone:prod",
     "deploy-insights": "npm-run-all build-insights:prod lint test",
     "lint": "npm-run-all lint:*",
     "lint:js": "eslint config src",
