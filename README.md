@@ -31,3 +31,11 @@ npm run build-standalone:prod
 docker build -t carlosthe19916/insights-frontend-started-app:latest .
 docker run -p 8080:80 carlosthe19916/insights-frontend-started-app:latest
 ```
+
+## Openshift
+
+Using https://github.com/nodeshift/ubi8-s2i-web-app
+
+```shell
+oc process -f .openshift/template.yml | oc create -f -
+```
