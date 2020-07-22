@@ -23,11 +23,21 @@ import {
     NavItem,
     Button
 } from '@patternfly/react-core';
+
+import Keycloak from 'keycloak-js';
+import { KeycloakProvider } from '@react-keycloak/web';
+
 import { Paths } from './Paths';
 import Logo from '../static/images/logo.svg';
 
 const registry = getRegistry();
 registry.register({ notifications });
+
+const keycloak = new Keycloak({
+    realm: 'c2b88098-c768-4457-b956-2a2d7b6711f5',
+    url: 'https://app.please-open.it/auth/',
+    clientId: 'pathfinder-ui'
+});
 
 class App extends Component {
     render() {
@@ -54,13 +64,13 @@ class App extends Component {
                     <Nav theme='dark'>
                         <NavList>
                             <NavItem>
-                                <NavLink to={Paths.samplePage} activeClassName="pf-m-current">SamplePage</NavLink>
+                                <NavLink to={Paths.samplePage} activeClassName='pf-m-current'>SamplePage</NavLink>
                             </NavItem>
                             <NavItem>
-                                <NavLink to={Paths.oops} activeClassName="pf-m-current">Oops</NavLink>
+                                <NavLink to={Paths.oops} activeClassName='pf-m-current'>Oops</NavLink>
                             </NavItem>
                             <NavItem>
-                                <NavLink to={Paths.noPermissions} activeClassName="pf-m-current">No permissions</NavLink>
+                                <NavLink to={Paths.noPermissions} activeClassName='pf-m-current'>No permissions</NavLink>
                             </NavItem>
                         </NavList>
                     </Nav>
@@ -72,10 +82,18 @@ class App extends Component {
             <Provider store={registry.getStore()}>
                 <Page isManagedSidebar={true} header={Header} sidebar={Sidebar}>
                     <NotificationsPortal />
-                    <Routes />
+                    <KeycloakProvider
+                        keycloak={keycloak}
+                        initConfig={{ onLoad: 'login-required' }}
+                        onTokens={(...tokens) => console.log('KeycloakProvider onToken:', tokens)}
+                        onEvent={(event, error) => console.log('KeycloakProvider onEvent:', event, error)}
+                    >
+                        <Routes />
+                    </KeycloakProvider>
                 </Page>
             </Provider>
         );
+
     }
 }
 
